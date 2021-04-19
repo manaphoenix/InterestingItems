@@ -1,0 +1,3 @@
+displayName = Interesting Items
+author = manapoenix
+version = 0.1
