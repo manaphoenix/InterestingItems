@@ -12,9 +12,9 @@ namespace InterestingItems
 		public bool SoulEffect;
 		public double SoulCharge;
 		public DebugUI Ui;
-		public bool CanCrit = false;
-		public float knockback = 0;
 		private readonly int SoulEffectRange = 256;
+		private bool CanCrit = false;
+		private float Knockback = 0;
 
 		public override void Initialize()
 		{
@@ -77,7 +77,13 @@ namespace InterestingItems
 						var dist = Vector2.Distance(npc.Center, player.Center);
 						if (dist <= SoulEffectRange)
 						{
-							GetModNPC(npc.type).StrikeNPC(ref SoulCharge, 0, ref knockback, 0, ref CanCrit);
+							if (npc.modNPC != null)
+							{
+								npc.modNPC.StrikeNPC(ref SoulCharge, 0, ref Knockback, 0, ref CanCrit);
+							} else
+							{
+								npc.StrikeNPC((int)(SoulCharge + (npc.defense * 0.5)), 0, 0);
+							}
 							hit = true;
 						}
 					}
@@ -101,16 +107,25 @@ namespace InterestingItems
 				DebugUI.Visible = true;
 			}
 		}
-
-		public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+		private void AddSoulCharge(int amount)
 		{
 			if (SoulEffect && SoulCharge < (1000 + (40 * player.statDefense)))
 			{
-				SoulCharge += (float)(damage * 0.25);
+				SoulCharge += amount;
 				Ui.SetText(SoulCharge.ToString());
 			}
 
 			SoulCharge = SoulCharge < (1000 + (40 * player.statDefense)) ? SoulCharge : (1000 + (40 * player.statDefense));
+		}
+
+		public override void OnHitByNPC(NPC npc, int damage, bool crit)
+		{
+			AddSoulCharge(npc.damage);
+		}
+
+		public override void OnHitByProjectile(Projectile proj, int damage, bool crit)
+		{
+			AddSoulCharge(proj.damage);
 		}
 	}
 }
