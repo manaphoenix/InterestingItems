@@ -64,6 +64,19 @@ namespace InterestingItems
 			Ui.SetText(SoulCharge.ToString());
 		}
 
+		private void HitNPC(NPC npc)
+		{
+			npc.life -= (int)SoulCharge;
+			npc.HitEffect(0, SoulCharge);
+			Main.PlaySound(npc.HitSound, npc.position);
+
+			Color color2 = (CanCrit ? CombatText.DamagedHostileCrit : CombatText.DamagedHostile);
+			CombatText.NewText(new Rectangle((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height), color2, (int)SoulCharge, CanCrit);
+
+			if (npc.life <= 0)
+				npc.checkDead();
+		}
+
 		public override void ProcessTriggers(TriggersSet triggersSet)
 		{
 			if (InterestingItems.SoulKey.JustPressed && SoulEffect && SoulCharge > 0)
@@ -77,13 +90,7 @@ namespace InterestingItems
 						var dist = Vector2.Distance(npc.Center, player.Center);
 						if (dist <= SoulEffectRange)
 						{
-							if (npc.modNPC != null)
-							{
-								npc.modNPC.StrikeNPC(ref SoulCharge, 0, ref Knockback, 0, ref CanCrit);
-							} else
-							{
-								npc.StrikeNPC((int)(SoulCharge + (npc.defense * 0.5)), 0, 0);
-							}
+							HitNPC(npc);
 							hit = true;
 						}
 					}
