@@ -31,6 +31,8 @@ namespace InterestingItems
 			recipe.AddIngredient(ItemID.SoulofMight, 5);
 			recipe.AddIngredient(ItemID.CrossNecklace);
 			recipe.AddIngredient(ItemID.HallowedBar, 10);
+			recipe.AddIngredient(ItemID.SoulofLight);
+			recipe.AddIngredient(ItemID.SoulofNight);
 			recipe.AddRecipeGroup("InterestingItems:EvilItems", 5);
 
 			recipe.AddTile(TileID.MythrilAnvil);

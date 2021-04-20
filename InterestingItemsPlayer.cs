@@ -12,9 +12,7 @@ namespace InterestingItems
 		public bool SoulEffect;
 		public double SoulCharge;
 		public DebugUI Ui;
-		private readonly int SoulEffectRange = 256;
 		private bool CanCrit = false;
-		private float Knockback = 0;
 
 		public override void Initialize()
 		{
@@ -63,6 +61,11 @@ namespace InterestingItems
 		{
 			Ui.SetText(SoulCharge.ToString());
 		}
+				
+		public override void PostUpdate()
+		{
+			base.PostUpdate();
+		}
 
 		private void HitNPC(NPC npc)
 		{
@@ -82,17 +85,15 @@ namespace InterestingItems
 			if (InterestingItems.SoulKey.JustPressed && SoulEffect && SoulCharge > 0)
 			{
 				var hit = false;
+				var cen = player.Center;
+				var SoulEffectRange = (8 + (player.statDefense / 8))*16;
 				for (var i = 0; i < Main.maxNPCs; i++)
 				{
 					var npc = Main.npc[i];
-					if (npc.CanBeChasedBy())
+					if (npc.CanBeChasedBy() && Vector2.Distance(npc.Center, cen) <= SoulEffectRange)
 					{
-						var dist = Vector2.Distance(npc.Center, player.Center);
-						if (dist <= SoulEffectRange)
-						{
-							HitNPC(npc);
-							hit = true;
-						}
+						HitNPC(npc);
+						hit = true;
 					}
 				}
 				if (hit)
@@ -114,11 +115,12 @@ namespace InterestingItems
 				DebugUI.Visible = true;
 			}
 		}
+
 		private void AddSoulCharge(int amount)
 		{
 			if (SoulEffect && SoulCharge < (1000 + (40 * player.statDefense)))
 			{
-				SoulCharge += amount;
+				SoulCharge += amount * 2;
 				Ui.SetText(SoulCharge.ToString());
 			}
 
