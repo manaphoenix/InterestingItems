@@ -8,6 +8,9 @@ Currently Adds:
 Soul items are special items that charge up based on certain actions, that can be released for a special ability.
 
 # Planned
+
 More soul Items
+
 More Regular Items
+
 New class?
