@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace InterestingItems.Items.BloodPendant
+namespace UniqueItems.Items.BloodPendant
 {
 	class BloodPendant : ModItem
 	{

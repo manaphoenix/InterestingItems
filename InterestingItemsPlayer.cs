@@ -1,11 +1,11 @@
-﻿using InterestingItems.UI;
+﻿using UniqueItems.UI;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
-namespace InterestingItems
+namespace UniqueItems
 {
 	class InterestingItemsPlayer : ModPlayer
 	{

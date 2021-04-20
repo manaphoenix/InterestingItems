@@ -3,7 +3,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
 
-namespace InterestingItems.UI
+namespace UniqueItems.UI
 {
 	public class DebugUI : UIState
 	{

@@ -5,9 +5,8 @@ using Terraria.Localization;
 using Terraria.UI;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System;
 
-namespace InterestingItems
+namespace UniqueItems
 {
 	public class InterestingItems : Mod
 	{
