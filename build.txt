@@ -1,9 +1,9 @@
 displayName = Unique Items
 author = manapoenix
-version = 0.1.1
+version = 0.1.2
 homepage = https://github.com/manaphoenix/UniqueItems
 hideCode = false
 hideResources = false
 includeSource = true
-buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.md
 includePDB = true

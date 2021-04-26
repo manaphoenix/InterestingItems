@@ -11,6 +11,7 @@ namespace UniqueItems
 	{
 		public bool SoulEffect;
 		public double SoulCharge;
+		public bool ManaVampirism;
 		public DebugUI Ui;
 		private readonly bool CanCrit = false;
 
@@ -22,6 +23,7 @@ namespace UniqueItems
 		public override void ResetEffects()
 		{
 			SoulEffect = false;
+			ManaVampirism = false;
 		}
 
 		public override void clientClone(ModPlayer clientClone)
@@ -29,6 +31,7 @@ namespace UniqueItems
 			var clone = clientClone as UniqueItemsPlayer;
 			clone.SoulEffect = SoulEffect;
 			clone.SoulCharge = SoulCharge;
+			clone.ManaVampirism = ManaVampirism;
 		}
 
 		public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
@@ -36,6 +39,7 @@ namespace UniqueItems
 			ModPacket packet = mod.GetPacket();
 			packet.Write(SoulEffect);
 			packet.Write(SoulCharge);
+			packet.Write(ManaVampirism);
 			packet.Send(toWho, fromWho);
 		}
 
@@ -47,6 +51,13 @@ namespace UniqueItems
 				var packet = mod.GetPacket();
 				packet.Write(SoulEffect);
 				packet.Write(SoulCharge);
+				
+				packet.Send();
+			}
+			if (clone.ManaVampirism != ManaVampirism)
+			{
+				var packet = mod.GetPacket();
+				packet.Write(ManaVampirism);
 				packet.Send();
 			}
 		}
@@ -130,6 +141,26 @@ namespace UniqueItems
 		public override void OnHitByProjectile(Projectile proj, int damage, bool crit)
 		{
 			AddSoulCharge(proj.damage);
+		}
+
+		private void ManaVampirismEffect(int damage, int life, int defense)
+		{
+			var amountdef = Main.CalculateDamage(damage, defense);
+			if (ManaVampirism && amountdef > life)
+			{
+				var amount = damage - life;
+				player.statMana += amount;
+			}
+		}
+
+		public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+		{
+			ManaVampirismEffect(proj.damage, target.life, target.defense);
+		}
+
+		public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+		{
+			ManaVampirismEffect(item.damage, target.life, target.defense);
 		}
 	}
 }

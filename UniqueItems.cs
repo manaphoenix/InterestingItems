@@ -33,11 +33,16 @@ namespace UniqueItems
 			recipe.AddIngredient(ItemID.SoulofLight);
 			recipe.AddIngredient(ItemID.SoulofNight);
 			recipe.AddRecipeGroup("InterestingItems:EvilItems", 5);
-
 			recipe.AddTile(TileID.MythrilAnvil);
-
 			recipe.SetResult(ModContent.ItemType<Items.BloodPendant.BloodPendant>());
-
+			recipe.AddRecipe();
+			recipe = new ModRecipe(this);
+			recipe.AddIngredient(ItemID.FallenStar);
+			recipe.AddIngredient(ItemID.SandBlock, 20);
+			recipe.AddIngredient(ItemID.Diamond);
+			recipe.AddIngredient(ItemID.Deathweed);
+			recipe.AddTile(TileID.Furnaces);
+			recipe.SetResult(ModContent.ItemType<Items.EbonyGem.EbonyGem>());
 			recipe.AddRecipe();
 		}
 
