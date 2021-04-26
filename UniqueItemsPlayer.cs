@@ -150,8 +150,9 @@ namespace UniqueItems
 			{
 				var amount = damage - life;
 				var max = player.statManaMax2 * 0.2;
-				player.statMana += amount <= max ? amount : (int)max;
-				CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.HealMana, amount, false);
+				var total = amount <= max ? amount : (int)max;
+				player.statMana += total;
+				CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.HealMana, total, false);
 			}
 		}
 
