@@ -146,10 +146,12 @@ namespace UniqueItems
 		private void ManaVampirismEffect(int damage, int life, int defense)
 		{
 			var amountdef = Main.CalculateDamage(damage, defense);
-			if (ManaVampirism && amountdef > life)
+			if (ManaVampirism && amountdef > life && player.statMana < player.statManaMax2)
 			{
 				var amount = damage - life;
-				player.statMana += amount;
+				var max = player.statManaMax2 * 0.2;
+				player.statMana += amount <= max ? amount : (int)max;
+				CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.HealMana, amount, false);
 			}
 		}
 
