@@ -12,7 +12,7 @@ namespace UniqueItems
 		public bool SoulEffect;
 		public double SoulCharge;
 		public bool ManaVampirism;
-		public DebugUI Ui;
+		public SoulChargeBar Ui;
 		private readonly bool CanCrit = false;
 
 		public override void Initialize()
@@ -115,10 +115,10 @@ namespace UniqueItems
 			if (!SoulEffect)
 			{
 				SoulCharge = 0;
-				DebugUI.Visible = false;
+				SoulChargeBar.Visible = false;
 			} else
 			{
-				DebugUI.Visible = true;
+				SoulChargeBar.Visible = true;
 			}
 		}
 

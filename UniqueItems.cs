@@ -11,7 +11,7 @@ namespace UniqueItems
 	public class UniqueItems : Mod
 	{
 		public static ModHotKey SoulKey;
-		internal UI.DebugUI DebugUI;
+		internal UI.SoulChargeBar DebugUI;
 		private UserInterface _interface;
 
 		public override void AddRecipeGroups()
@@ -51,7 +51,7 @@ namespace UniqueItems
 			SoulKey = RegisterHotKey("Activate Soul Item", "V");
 			if (!Main.dedServ)
 			{
-				DebugUI = new UI.DebugUI();
+				DebugUI = new UI.SoulChargeBar();
 				_interface = new UserInterface();
 				DebugUI.Activate();
 				_interface.SetState(DebugUI);
@@ -67,7 +67,7 @@ namespace UniqueItems
 		// UI STUFF?!
 		public override void UpdateUI(GameTime gameTime)
 		{
-			if (UI.DebugUI.Visible)
+			if (UI.SoulChargeBar.Visible)
 				_interface?.Update(gameTime);
 		}
 
@@ -80,7 +80,7 @@ namespace UniqueItems
 					"YourMod: A Description",
 					delegate
 					{
-						if (UI.DebugUI.Visible)
+						if (UI.SoulChargeBar.Visible)
 							_interface.Draw(Main.spriteBatch, new GameTime());
 						return true;
 					},
