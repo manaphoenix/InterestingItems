@@ -24,7 +24,7 @@ namespace UniqueItems.Items.BloodPendant
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-            var mp = player.GetModPlayer<InterestingItemsPlayer>();
+            var mp = player.GetModPlayer<UniqueItemsPlayer>();
 
             mp.SoulEffect = true;
         }

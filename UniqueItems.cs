@@ -1,14 +1,14 @@
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Localization;
-using Terraria.UI;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
+using Terraria.UI;
 
 namespace UniqueItems
 {
-	public class InterestingItems : Mod
+	public class UniqueItems : Mod
 	{
 		public static ModHotKey SoulKey;
 		internal UI.DebugUI DebugUI;
@@ -62,7 +62,7 @@ namespace UniqueItems
 		// UI STUFF?!
 		public override void UpdateUI(GameTime gameTime)
 		{
-			if (UI.DebugUI.Visible) 
+			if (UI.DebugUI.Visible)
 				_interface?.Update(gameTime);
 		}
 

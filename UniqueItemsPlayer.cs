@@ -7,16 +7,16 @@ using static Terraria.ModLoader.ModContent;
 
 namespace UniqueItems
 {
-	class InterestingItemsPlayer : ModPlayer
+	class UniqueItemsPlayer : ModPlayer
 	{
 		public bool SoulEffect;
 		public double SoulCharge;
 		public DebugUI Ui;
-		private bool CanCrit = false;
+		private readonly bool CanCrit = false;
 
 		public override void Initialize()
 		{
-			Ui = GetInstance<InterestingItems>().DebugUI;
+			Ui = GetInstance<UniqueItems>().DebugUI;
 		}
 
 		public override void ResetEffects()
@@ -26,7 +26,7 @@ namespace UniqueItems
 
 		public override void clientClone(ModPlayer clientClone)
 		{
-			var clone = clientClone as InterestingItemsPlayer;
+			var clone = clientClone as UniqueItemsPlayer;
 			clone.SoulEffect = SoulEffect;
 			clone.SoulCharge = SoulCharge;
 		}
@@ -41,7 +41,7 @@ namespace UniqueItems
 
 		public override void SendClientChanges(ModPlayer clientPlayer)
 		{
-			InterestingItemsPlayer clone = clientPlayer as InterestingItemsPlayer;
+			UniqueItemsPlayer clone = clientPlayer as UniqueItemsPlayer;
 			if (clone.SoulEffect != SoulEffect)
 			{
 				var packet = mod.GetPacket();
@@ -61,11 +61,6 @@ namespace UniqueItems
 		{
 			Ui.SetText(SoulCharge.ToString());
 		}
-				
-		public override void PostUpdate()
-		{
-			base.PostUpdate();
-		}
 
 		private void HitNPC(NPC npc)
 		{
@@ -82,7 +77,7 @@ namespace UniqueItems
 
 		public override void ProcessTriggers(TriggersSet triggersSet)
 		{
-			if (InterestingItems.SoulKey.JustPressed && SoulEffect && SoulCharge > 0)
+			if (UniqueItems.SoulKey.JustPressed && SoulEffect && SoulCharge > 0)
 			{
 				var hit = false;
 				var cen = player.Center;
