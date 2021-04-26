@@ -143,10 +143,9 @@ namespace UniqueItems
 			AddSoulCharge(proj.damage);
 		}
 
-		private void ManaVampirismEffect(int damage, int life, int defense)
+		private void ManaVampirismEffect(int damage, int life)
 		{
-			var amountdef = Main.CalculateDamage(damage, defense);
-			if (ManaVampirism && amountdef > life && player.statMana < player.statManaMax2)
+			if (ManaVampirism && damage > life && player.statMana < player.statManaMax2)
 			{
 				var amount = damage - life;
 				var max = player.statManaMax2 * 0.2;
@@ -158,12 +157,12 @@ namespace UniqueItems
 
 		public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
 		{
-			ManaVampirismEffect(proj.damage, target.life, target.defense);
+			ManaVampirismEffect(proj.damage, target.life);
 		}
 
 		public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
 		{
-			ManaVampirismEffect(item.damage, target.life, target.defense);
+			ManaVampirismEffect(item.damage, target.life);
 		}
 	}
 }
