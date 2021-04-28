@@ -1,6 +1,6 @@
 displayName = Unique Items
 author = manapoenix
-version = 0.1.2
+version = 0.1.3
 homepage = https://github.com/manaphoenix/UniqueItems
 hideCode = false
 hideResources = false

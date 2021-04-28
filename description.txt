@@ -2,6 +2,6 @@ Unique Items adds in more items with unique and/or varying mechanics. The intent
 
 Currently Adds:
 (NEW) 1 Soul Item
-1 New Item
+2 New Items
 
 Soul items are special items that charge up based on certain actions, that can be released for a special ability.

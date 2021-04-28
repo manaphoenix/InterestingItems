@@ -138,8 +138,9 @@ namespace UniqueItems
 			if (ManaShield)
 			{
 				var redir = damage / 2;
+				var cache = player.statMana;
 				player.statMana = redir <= player.statMana ? (player.statMana - redir) : 0;
-				redir -= redir - player.statMana;
+				redir -= redir - cache < 0 ? 0 : redir-cache;
 				damage -= redir;
 			}
 			return true;
