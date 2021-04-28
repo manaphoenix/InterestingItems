@@ -44,6 +44,15 @@ namespace UniqueItems
 			recipe.AddTile(TileID.Furnaces);
 			recipe.SetResult(ModContent.ItemType<Items.EbonyGem.EbonyGem>());
 			recipe.AddRecipe();
+
+			recipe = new ModRecipe(this);
+			recipe.AddIngredient(ItemID.FallenStar, 5);
+			recipe.AddIngredient(ItemID.Glass, 20);
+			recipe.AddIngredient(ItemID.Diamond);
+			recipe.AddIngredient(ItemID.CobaltShield);
+			recipe.AddTile(TileID.AlchemyTable);
+			recipe.SetResult(ModContent.ItemType<Items.ManaShield.ManaShield>());
+			recipe.AddRecipe();
 		}
 
 		public override void Load()

@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.DataStructures;
 
 namespace UniqueItems
 {
@@ -12,6 +13,7 @@ namespace UniqueItems
 		public bool SoulEffect;
 		public double SoulCharge;
 		public bool ManaVampirism;
+		public bool ManaShield;
 		public SoulChargeBar Ui;
 		private readonly bool CanCrit = false;
 
@@ -24,6 +26,7 @@ namespace UniqueItems
 		{
 			SoulEffect = false;
 			ManaVampirism = false;
+			ManaShield = false;
 		}
 
 		public override void clientClone(ModPlayer clientClone)
@@ -32,6 +35,7 @@ namespace UniqueItems
 			clone.SoulEffect = SoulEffect;
 			clone.SoulCharge = SoulCharge;
 			clone.ManaVampirism = ManaVampirism;
+			clone.ManaShield = ManaShield;
 		}
 
 		public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
@@ -40,6 +44,7 @@ namespace UniqueItems
 			packet.Write(SoulEffect);
 			packet.Write(SoulCharge);
 			packet.Write(ManaVampirism);
+			packet.Write(ManaShield);
 			packet.Send(toWho, fromWho);
 		}
 
@@ -58,6 +63,12 @@ namespace UniqueItems
 			{
 				var packet = mod.GetPacket();
 				packet.Write(ManaVampirism);
+				packet.Send();
+			}
+			if (clone.ManaShield != ManaShield)
+			{
+				var packet = mod.GetPacket();
+				packet.Write(ManaShield);
 				packet.Send();
 			}
 		}
@@ -120,6 +131,18 @@ namespace UniqueItems
 			{
 				SoulChargeBar.Visible = true;
 			}
+		}
+
+		public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+		{
+			if (ManaShield)
+			{
+				var redir = damage / 2;
+				player.statMana = redir <= player.statMana ? (player.statMana - redir) : 0;
+				redir -= redir - player.statMana;
+				damage -= redir;
+			}
+			return true;
 		}
 
 		private void AddSoulCharge(int amount)
