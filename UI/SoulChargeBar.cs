@@ -2,6 +2,7 @@
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 using Terraria.ModLoader;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace UniqueItems.UI
 {
@@ -21,7 +22,7 @@ namespace UniqueItems.UI
 			frame.Width.Set(256f, 0);
 			frame.Height.Set(64f, 0);
 
-			image = new UIImage(ModContent.GetTexture("UniqueItems/UI/SoulChargeBar"));
+			image = new UIImage(ModContent.Request<Texture2D>("UniqueItems/UI/SoulChargeBar"));
 			image.Left.Set(0f, 0f);
 			image.Top.Set(0f, 0f);
 			image.Width.Set(256f, 0f);

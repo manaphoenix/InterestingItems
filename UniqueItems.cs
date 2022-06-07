@@ -1,14 +1,14 @@
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace UniqueItems
 {
-	public class UniqueItems : Mod
+	public class UniqueItems : ModSystem
 	{
 		public static ModKeybind SoulKey;
 		internal UI.SoulChargeBar DebugUI;
@@ -26,7 +26,7 @@ namespace UniqueItems
 
 		public override void AddRecipes()
 		{
-			var recipe = new ModRecipe(this);
+			var recipe = Mod.CreateRecipe(ModContent.ItemType<Items.BloodPendant.BloodPendant>(), 1);
 			recipe.AddIngredient(ItemID.SoulofMight, 5);
 			recipe.AddIngredient(ItemID.CrossNecklace);
 			recipe.AddIngredient(ItemID.HallowedBar, 10);
@@ -34,30 +34,23 @@ namespace UniqueItems
 			recipe.AddIngredient(ItemID.SoulofNight);
 			recipe.AddRecipeGroup("InterestingItems:EvilItems", 5);
 			recipe.AddTile(TileID.MythrilAnvil);
-			recipe.SetResult(ModContent.ItemType<Items.BloodPendant.BloodPendant>());
-			recipe.AddRecipe();
-			recipe = new ModRecipe(this);
+			recipe = Mod.CreateRecipe(ModContent.ItemType<Items.EbonyGem.EbonyGem>(), 1);
 			recipe.AddIngredient(ItemID.FallenStar);
 			recipe.AddIngredient(ItemID.SandBlock, 20);
 			recipe.AddIngredient(ItemID.Diamond);
 			recipe.AddIngredient(ItemID.Deathweed);
 			recipe.AddTile(TileID.Furnaces);
-			recipe.SetResult(ModContent.ItemType<Items.EbonyGem.EbonyGem>());
-			recipe.AddRecipe();
-
-			recipe = new ModRecipe(this);
+			recipe = Mod.CreateRecipe(ModContent.ItemType<Items.ManaShield.ManaShield>(), 1);
 			recipe.AddIngredient(ItemID.FallenStar, 5);
 			recipe.AddIngredient(ItemID.Glass, 20);
 			recipe.AddIngredient(ItemID.Diamond);
 			recipe.AddIngredient(ItemID.CobaltShield);
 			recipe.AddTile(TileID.AlchemyTable);
-			recipe.SetResult(ModContent.ItemType<Items.ManaShield.ManaShield>());
-			recipe.AddRecipe();
 		}
 
 		public override void Load()
 		{
-			//SoulKey = RegisterHotKey("Activate Soul Item", "V");
+			SoulKey = KeybindLoader.RegisterKeybind(Mod, "soul key", Microsoft.Xna.Framework.Input.Keys.V);
 			if (!Main.dedServ)
 			{
 				DebugUI = new UI.SoulChargeBar();
@@ -72,15 +65,13 @@ namespace UniqueItems
 			SoulKey = null;
 		}
 
-
 		// UI STUFF?!
-		/*
+		
 		public override void UpdateUI(GameTime gameTime)
 		{
 			if (UI.SoulChargeBar.Visible)
 				_interface?.Update(gameTime);
 		}
-		
 
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
@@ -99,6 +90,6 @@ namespace UniqueItems
 				);
 			}
 		}
-		*/
+		
 	}
 }
