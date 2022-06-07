@@ -1,4 +1,5 @@
-﻿using UniqueItems.UI;
+﻿using Terraria.Audio;
+using UniqueItems.UI;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameInput;
@@ -40,7 +41,7 @@ namespace UniqueItems
 
 		public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
 		{
-			ModPacket packet = mod.GetPacket();
+			ModPacket packet = Mod.GetPacket();
 			packet.Write(SoulEffect);
 			packet.Write(SoulCharge);
 			packet.Write(ManaVampirism);
@@ -53,7 +54,7 @@ namespace UniqueItems
 			UniqueItemsPlayer clone = clientPlayer as UniqueItemsPlayer;
 			if (clone.SoulEffect != SoulEffect)
 			{
-				var packet = mod.GetPacket();
+				var packet = Mod.GetPacket();
 				packet.Write(SoulEffect);
 				packet.Write(SoulCharge);
 				
@@ -61,13 +62,13 @@ namespace UniqueItems
 			}
 			if (clone.ManaVampirism != ManaVampirism)
 			{
-				var packet = mod.GetPacket();
+				var packet = Mod.GetPacket();
 				packet.Write(ManaVampirism);
 				packet.Send();
 			}
 			if (clone.ManaShield != ManaShield)
 			{
-				var packet = mod.GetPacket();
+				var packet = Mod.GetPacket();
 				packet.Write(ManaShield);
 				packet.Send();
 			}
@@ -88,7 +89,7 @@ namespace UniqueItems
 		{
 			npc.life -= (int)SoulCharge;
 			npc.HitEffect(0, SoulCharge);
-			Main.PlaySound(npc.HitSound, npc.position);
+			SoundEngine.PlaySound((SoundStyle)npc.HitSound, npc.position);
 
 			Color color2 = (CanCrit ? CombatText.DamagedHostileCrit : CombatText.DamagedHostile);
 			CombatText.NewText(new Rectangle((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height), color2, (int)SoulCharge, CanCrit);
@@ -102,8 +103,8 @@ namespace UniqueItems
 			if (UniqueItems.SoulKey.JustPressed && SoulEffect && SoulCharge > 0)
 			{
 				var hit = false;
-				var cen = player.Center;
-				var SoulEffectRange = (8 + (player.statDefense / 8))*16;
+				var cen = Player.Center;
+				var SoulEffectRange = (8 + (Player.statDefense / 8))*16;
 				for (var i = 0; i < Main.maxNPCs; i++)
 				{
 					var npc = Main.npc[i];
@@ -121,13 +122,14 @@ namespace UniqueItems
 			}
 		}
 
-		public override void UpdateEquips(ref bool wallSpeedBuff, ref bool tileSpeedBuff, ref bool tileRangeBuff)
+		public override void UpdateEquips()
 		{
 			if (!SoulEffect)
 			{
 				SoulCharge = 0;
 				SoulChargeBar.Visible = false;
-			} else
+			}
+			else
 			{
 				SoulChargeBar.Visible = true;
 			}
@@ -138,8 +140,8 @@ namespace UniqueItems
 			if (ManaShield)
 			{
 				var redir = damage / 2;
-				var cache = player.statMana;
-				player.statMana = redir <= player.statMana ? (player.statMana - redir) : 0;
+				var cache = Player.statMana;
+				Player.statMana = redir <= Player.statMana ? (Player.statMana - redir) : 0;
 				redir -= redir - cache < 0 ? 0 : redir-cache;
 				damage -= redir;
 			}
@@ -148,13 +150,13 @@ namespace UniqueItems
 
 		private void AddSoulCharge(int amount)
 		{
-			if (SoulEffect && SoulCharge < (1000 + (40 * player.statDefense)))
+			if (SoulEffect && SoulCharge < (1000 + (40 * Player.statDefense)))
 			{
 				SoulCharge += amount * 2;
 				Ui.SetText(SoulCharge.ToString());
 			}
 
-			SoulCharge = SoulCharge < (1000 + (40 * player.statDefense)) ? SoulCharge : (1000 + (40 * player.statDefense));
+			SoulCharge = SoulCharge < (1000 + (40 * Player.statDefense)) ? SoulCharge : (1000 + (40 * Player.statDefense));
 		}
 
 		public override void OnHitByNPC(NPC npc, int damage, bool crit)
@@ -169,13 +171,13 @@ namespace UniqueItems
 
 		private void ManaVampirismEffect(int damage, int life)
 		{
-			if (ManaVampirism && damage > life && player.statMana < player.statManaMax2)
+			if (ManaVampirism && damage > life && Player.statMana < Player.statManaMax2)
 			{
 				var amount = damage - life;
-				var max = player.statManaMax2 * 0.2;
+				var max = Player.statManaMax2 * 0.2;
 				var total = amount <= max ? amount : (int)max;
-				player.statMana += total;
-				CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.HealMana, total, false);
+				Player.statMana += total;
+				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.HealMana, total, false);
 			}
 		}
 

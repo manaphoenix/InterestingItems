@@ -10,7 +10,7 @@ namespace UniqueItems
 {
 	public class UniqueItems : Mod
 	{
-		public static ModHotKey SoulKey;
+		public static ModKeybind SoulKey;
 		internal UI.SoulChargeBar DebugUI;
 		private UserInterface _interface;
 
@@ -57,7 +57,7 @@ namespace UniqueItems
 
 		public override void Load()
 		{
-			SoulKey = RegisterHotKey("Activate Soul Item", "V");
+			//SoulKey = RegisterHotKey("Activate Soul Item", "V");
 			if (!Main.dedServ)
 			{
 				DebugUI = new UI.SoulChargeBar();
@@ -74,11 +74,13 @@ namespace UniqueItems
 
 
 		// UI STUFF?!
+		/*
 		public override void UpdateUI(GameTime gameTime)
 		{
 			if (UI.SoulChargeBar.Visible)
 				_interface?.Update(gameTime);
 		}
+		
 
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
@@ -97,5 +99,6 @@ namespace UniqueItems
 				);
 			}
 		}
+		*/
 	}
 }

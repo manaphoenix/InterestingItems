@@ -13,13 +13,13 @@ namespace UniqueItems.Items.BloodPendant
 
         public override void SetDefaults()
         {
-            item.width = 20;
-            item.height = 20;
-            item.maxStack = 1;
-            item.value = Item.sellPrice(0, 7, 40, 20);
-            item.rare = ItemRarityID.Pink;
-            item.accessory = true;
-            item.defense = 3;
+            Item.width = 20;
+            Item.height = 20;
+            Item.maxStack = 1;
+            Item.value = Item.sellPrice(0, 7, 40, 20);
+            Item.rare = ItemRarityID.Pink;
+            Item.accessory = true;
+            Item.defense = 3;
         }
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
