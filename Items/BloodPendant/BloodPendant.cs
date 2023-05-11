@@ -8,7 +8,7 @@ namespace UniqueItems.Items.BloodPendant
 	{
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Damage charges this item, when charged release it do that damage out.");
+            Tooltip.SetDefault("Taking damage charges this item. When the charge is released it creates an AOE blast of damage outwards dependant on how charged the item is!");
         }
 
         public override void SetDefaults()

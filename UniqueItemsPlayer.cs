@@ -135,16 +135,17 @@ namespace UniqueItems
 			}
 		}
 
-		public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+		public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
 		{
 			if (ManaShield)
 			{
 				var redir = damage / 2;
 				var cache = Player.statMana;
 				Player.statMana = redir <= Player.statMana ? (Player.statMana - redir) : 0;
-				redir -= redir - cache < 0 ? 0 : redir-cache;
+				redir -= redir - cache < 0 ? 0 : redir - cache;
 				damage -= redir;
 			}
+
 			return true;
 		}
 

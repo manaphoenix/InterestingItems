@@ -26,7 +26,7 @@ namespace UniqueItems
 
 		public override void AddRecipes()
 		{
-			var recipe = Mod.CreateRecipe(ModContent.ItemType<Items.BloodPendant.BloodPendant>(), 1);
+			var recipe = Recipe.Create(ModContent.ItemType<Items.BloodPendant.BloodPendant>(), 1);
 			recipe.AddIngredient(ItemID.SoulofMight, 5);
 			recipe.AddIngredient(ItemID.CrossNecklace);
 			recipe.AddIngredient(ItemID.HallowedBar, 10);
@@ -34,13 +34,13 @@ namespace UniqueItems
 			recipe.AddIngredient(ItemID.SoulofNight);
 			recipe.AddRecipeGroup("InterestingItems:EvilItems", 5);
 			recipe.AddTile(TileID.MythrilAnvil);
-			recipe = Mod.CreateRecipe(ModContent.ItemType<Items.EbonyGem.EbonyGem>(), 1);
+			recipe = Recipe.Create(ModContent.ItemType<Items.EbonyGem.EbonyGem>(), 1);
 			recipe.AddIngredient(ItemID.FallenStar);
 			recipe.AddIngredient(ItemID.SandBlock, 20);
 			recipe.AddIngredient(ItemID.Diamond);
 			recipe.AddIngredient(ItemID.Deathweed);
 			recipe.AddTile(TileID.Furnaces);
-			recipe = Mod.CreateRecipe(ModContent.ItemType<Items.ManaShield.ManaShield>(), 1);
+			recipe = Recipe.Create(ModContent.ItemType<Items.ManaShield.ManaShield>(), 1);
 			recipe.AddIngredient(ItemID.FallenStar, 5);
 			recipe.AddIngredient(ItemID.Glass, 20);
 			recipe.AddIngredient(ItemID.Diamond);
