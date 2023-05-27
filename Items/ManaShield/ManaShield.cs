@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -8,8 +9,8 @@ namespace UniqueItems.Items.ManaShield
 	{
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("50% of all damage is taken from mana first.");
-        }
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+		}
 
         public override void SetDefaults()
         {

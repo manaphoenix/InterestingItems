@@ -34,18 +34,26 @@ namespace UniqueItems
 			recipe.AddIngredient(ItemID.SoulofNight);
 			recipe.AddRecipeGroup("InterestingItems:EvilItems", 5);
 			recipe.AddTile(TileID.MythrilAnvil);
+			recipe.Register();
 			recipe = Recipe.Create(ModContent.ItemType<Items.EbonyGem.EbonyGem>(), 1);
 			recipe.AddIngredient(ItemID.FallenStar);
 			recipe.AddIngredient(ItemID.SandBlock, 20);
 			recipe.AddIngredient(ItemID.Diamond);
 			recipe.AddIngredient(ItemID.Deathweed);
 			recipe.AddTile(TileID.Furnaces);
+			recipe.Register();
 			recipe = Recipe.Create(ModContent.ItemType<Items.ManaShield.ManaShield>(), 1);
 			recipe.AddIngredient(ItemID.FallenStar, 5);
 			recipe.AddIngredient(ItemID.Glass, 20);
 			recipe.AddIngredient(ItemID.Diamond);
 			recipe.AddIngredient(ItemID.CobaltShield);
 			recipe.AddTile(TileID.AlchemyTable);
+			recipe.Register();
+			recipe = Recipe.Create(ModContent.ItemType<Items.DiamondSconce.DiamondSconce>(), 1);
+			recipe.AddIngredient(ItemID.Diamond, 3);
+			recipe.AddIngredient(ItemID.Candle, 1);
+			recipe.AddTile(TileID.WorkBenches);
+			recipe.Register();
 		}
 
 		public override void Load()

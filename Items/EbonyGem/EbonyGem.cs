@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -8,8 +9,8 @@ namespace UniqueItems.Items.EbonyGem
 	{
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Gives Mana Vampirism.");
-        }
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+		}
 
         public override void SetDefaults()
         {

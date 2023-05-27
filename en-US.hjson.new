@@ -4,7 +4,7 @@ Mods: {
 		Items: {
 			BloodPendant: {
 				DisplayName: Blood Pendant
-				Tooltip: Damage charges this item, when charged release it do that damage out.
+				Tooltip: Taking damage charges this item. When the charge is released it creates an AOE blast of damage outwards dependant on how charged the item is!
 			}
 
 			EbonyGem: {
@@ -15,6 +15,11 @@ Mods: {
 			ManaShield: {
 				DisplayName: Mana Shield
 				Tooltip: 50% of all damage is taken from mana first.
+			}
+
+			DiamondSconce: {
+				DisplayName: Diamond Sconce
+				Tooltip: 50% Faster Mining Speed.
 			}
 		}
 	}
