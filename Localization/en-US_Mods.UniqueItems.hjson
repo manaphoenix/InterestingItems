@@ -1,0 +1,23 @@
+"Keybinds.soul key.DisplayName": soul key
+
+Items: {
+	BloodPendant: {
+		DisplayName: Blood Pendant
+		Tooltip: ""
+	}
+
+	DiamondSconce: {
+		DisplayName: Diamond Sconce
+		Tooltip: ""
+	}
+
+	EbonyGem: {
+		DisplayName: Ebony Gem
+		Tooltip: ""
+	}
+
+	ManaShield: {
+		DisplayName: Mana Shield
+		Tooltip: ""
+	}
+}

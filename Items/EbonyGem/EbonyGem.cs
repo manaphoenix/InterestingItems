@@ -22,7 +22,18 @@ namespace UniqueItems.Items.EbonyGem
             Item.accessory = true;
         }
 
-        public override void UpdateAccessory(Player player, bool hideVisual)
+		public override void AddRecipes()
+		{
+			CreateRecipe()
+			    .AddIngredient(ItemID.FallenStar)
+			    .AddIngredient(ItemID.SandBlock, 20)
+			    .AddIngredient(ItemID.Diamond)
+			    .AddIngredient(ItemID.Deathweed)
+			    .AddTile(TileID.Furnaces)
+			    .Register();
+		}
+
+		public override void UpdateAccessory(Player player, bool hideVisual)
         {
             var mp = player.GetModPlayer<UniqueItemsPlayer>();
 

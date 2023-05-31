@@ -22,7 +22,18 @@ namespace UniqueItems.Items.ManaShield
             Item.accessory = true;
         }
 
-        public override void UpdateAccessory(Player player, bool hideVisual)
+		public override void AddRecipes()
+		{
+			CreateRecipe()
+			    .AddIngredient(ItemID.FallenStar, 5)
+			    .AddIngredient(ItemID.Glass, 20)
+			    .AddIngredient(ItemID.Diamond)
+			    .AddIngredient(ItemID.CobaltShield)
+			    .AddTile(TileID.AlchemyTable)
+			    .Register();
+		}
+
+		public override void UpdateAccessory(Player player, bool hideVisual)
         {
             var mp = player.GetModPlayer<UniqueItemsPlayer>();
 

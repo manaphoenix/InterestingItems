@@ -19,7 +19,7 @@ Mods: {
 
 			DiamondSconce: {
 				DisplayName: Diamond Sconce
-				Tooltip: 50% Faster Mining Speed.
+				Tooltip: 50% faster mining speed!
 			}
 		}
 	}

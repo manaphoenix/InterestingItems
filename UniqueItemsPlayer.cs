@@ -5,7 +5,6 @@ using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Terraria.DataStructures;
 
 namespace UniqueItems
 {
@@ -30,7 +29,7 @@ namespace UniqueItems
 			ManaShield = false;
 		}
 
-		public override void clientClone(ModPlayer clientClone)
+		public override void CopyClientState(ModPlayer clientClone)
 		{
 			var clone = clientClone as UniqueItemsPlayer;
 			clone.SoulEffect = SoulEffect;
@@ -52,26 +51,21 @@ namespace UniqueItems
 		public override void SendClientChanges(ModPlayer clientPlayer)
 		{
 			UniqueItemsPlayer clone = clientPlayer as UniqueItemsPlayer;
+			var packet = Mod.GetPacket();
 			if (clone.SoulEffect != SoulEffect)
 			{
-				var packet = Mod.GetPacket();
 				packet.Write(SoulEffect);
 				packet.Write(SoulCharge);
-				
-				packet.Send();
 			}
 			if (clone.ManaVampirism != ManaVampirism)
 			{
-				var packet = Mod.GetPacket();
 				packet.Write(ManaVampirism);
-				packet.Send();
 			}
 			if (clone.ManaShield != ManaShield)
 			{
-				var packet = Mod.GetPacket();
 				packet.Write(ManaShield);
-				packet.Send();
 			}
+			packet.Send();
 		}
 
 		public override void UpdateDead()
@@ -80,7 +74,7 @@ namespace UniqueItems
 			Ui.SetText(SoulCharge.ToString());
 		}
 
-		public override void OnRespawn(Player player)
+		public override void OnRespawn()
 		{
 			Ui.SetText(SoulCharge.ToString());
 		}
@@ -135,18 +129,21 @@ namespace UniqueItems
 			}
 		}
 
-		public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
+		public override void OnHurt(Player.HurtInfo info)
+		{
+			base.OnHurt(info);
+		}
+
+		public override void ModifyHurt(ref Player.HurtModifiers modifiers)
 		{
 			if (ManaShield)
 			{
-				var redir = damage / 2;
+				var redir = modifiers.FinalDamage.Flat / 2;
 				var cache = Player.statMana;
-				Player.statMana = redir <= Player.statMana ? (Player.statMana - redir) : 0;
+				Player.statMana = (int)(redir <= Player.statMana ? (Player.statMana - redir) : 0);
 				redir -= redir - cache < 0 ? 0 : redir - cache;
-				damage -= redir;
+				modifiers.FinalDamage -= redir;
 			}
-
-			return true;
 		}
 
 		private void AddSoulCharge(int amount)
@@ -160,12 +157,12 @@ namespace UniqueItems
 			SoulCharge = SoulCharge < (1000 + (40 * Player.statDefense)) ? SoulCharge : (1000 + (40 * Player.statDefense));
 		}
 
-		public override void OnHitByNPC(NPC npc, int damage, bool crit)
+		public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
 		{
 			AddSoulCharge(npc.damage);
 		}
 
-		public override void OnHitByProjectile(Projectile proj, int damage, bool crit)
+		public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
 		{
 			AddSoulCharge(proj.damage);
 		}
@@ -182,14 +179,10 @@ namespace UniqueItems
 			}
 		}
 
-		public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
-			ManaVampirismEffect(proj.damage, target.life);
-		}
-
-		public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
-		{
-			ManaVampirismEffect(item.damage, target.life);
+			//When hit activate the Mana Vampirism Effect.
+			ManaVampirismEffect(damageDone, target.life);
 		}
 	}
 }

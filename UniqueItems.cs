@@ -24,38 +24,6 @@ namespace UniqueItems
 			RecipeGroup.RegisterGroup("InterestingItems:EvilItems", evilGroup);
 		}
 
-		public override void AddRecipes()
-		{
-			var recipe = Recipe.Create(ModContent.ItemType<Items.BloodPendant.BloodPendant>(), 1);
-			recipe.AddIngredient(ItemID.SoulofMight, 5);
-			recipe.AddIngredient(ItemID.CrossNecklace);
-			recipe.AddIngredient(ItemID.HallowedBar, 10);
-			recipe.AddIngredient(ItemID.SoulofLight);
-			recipe.AddIngredient(ItemID.SoulofNight);
-			recipe.AddRecipeGroup("InterestingItems:EvilItems", 5);
-			recipe.AddTile(TileID.MythrilAnvil);
-			recipe.Register();
-			recipe = Recipe.Create(ModContent.ItemType<Items.EbonyGem.EbonyGem>(), 1);
-			recipe.AddIngredient(ItemID.FallenStar);
-			recipe.AddIngredient(ItemID.SandBlock, 20);
-			recipe.AddIngredient(ItemID.Diamond);
-			recipe.AddIngredient(ItemID.Deathweed);
-			recipe.AddTile(TileID.Furnaces);
-			recipe.Register();
-			recipe = Recipe.Create(ModContent.ItemType<Items.ManaShield.ManaShield>(), 1);
-			recipe.AddIngredient(ItemID.FallenStar, 5);
-			recipe.AddIngredient(ItemID.Glass, 20);
-			recipe.AddIngredient(ItemID.Diamond);
-			recipe.AddIngredient(ItemID.CobaltShield);
-			recipe.AddTile(TileID.AlchemyTable);
-			recipe.Register();
-			recipe = Recipe.Create(ModContent.ItemType<Items.DiamondSconce.DiamondSconce>(), 1);
-			recipe.AddIngredient(ItemID.Diamond, 3);
-			recipe.AddIngredient(ItemID.Candle, 1);
-			recipe.AddTile(TileID.WorkBenches);
-			recipe.Register();
-		}
-
 		public override void Load()
 		{
 			SoulKey = KeybindLoader.RegisterKeybind(Mod, "soul key", Microsoft.Xna.Framework.Input.Keys.V);

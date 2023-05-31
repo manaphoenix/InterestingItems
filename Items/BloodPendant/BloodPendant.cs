@@ -23,6 +23,19 @@ namespace UniqueItems.Items.BloodPendant
             Item.defense = 3;
         }
 
+		public override void AddRecipes()
+		{
+			CreateRecipe()
+				.AddIngredient(ItemID.SoulofMight, 5)
+				.AddIngredient(ItemID.CrossNecklace)
+				.AddIngredient(ItemID.HallowedBar, 10)
+				.AddIngredient(ItemID.SoulofLight)
+				.AddIngredient(ItemID.SoulofNight)
+				.AddRecipeGroup("InterestingItems:EvilItems", 5)
+				.AddTile(TileID.MythrilAnvil)
+				.Register();
+		}
+
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
             var mp = player.GetModPlayer<UniqueItemsPlayer>();
