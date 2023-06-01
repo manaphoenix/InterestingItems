@@ -3,21 +3,21 @@
 Items: {
 	BloodPendant: {
 		DisplayName: Blood Pendant
-		Tooltip: ""
-	}
-
-	DiamondSconce: {
-		DisplayName: Diamond Sconce
-		Tooltip: ""
+		Tooltip: Taking damage charges this item. When the charge is released it creates an AOE blast of damage outwards dependant on how charged the item is!
 	}
 
 	EbonyGem: {
 		DisplayName: Ebony Gem
-		Tooltip: ""
+		Tooltip: Gives Mana Vampirism.
 	}
 
 	ManaShield: {
 		DisplayName: Mana Shield
-		Tooltip: ""
+		Tooltip: 50% of all damage is taken from mana first.
+	}
+
+	DiamondSconce: {
+		DisplayName: Diamond Sconce
+		Tooltip: 50% faster mining speed!
 	}
 }

@@ -22,6 +22,12 @@ namespace UniqueItems
 				ItemID.Vertebrae
 			});
 			RecipeGroup.RegisterGroup("InterestingItems:EvilItems", evilGroup);
+			var candleGroup = new RecipeGroup(() => Language.GetTextValue("LegacyMisc.37") + " candle", new int[]
+			{
+				ItemID.Candle,
+				ItemID.PlatinumCandle
+			});
+			RecipeGroup.RegisterGroup("InterestingItems:Candles", candleGroup);
 		}
 
 		public override void Load()

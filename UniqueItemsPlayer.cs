@@ -85,7 +85,7 @@ namespace UniqueItems
 			npc.HitEffect(0, SoulCharge);
 			SoundEngine.PlaySound((SoundStyle)npc.HitSound, npc.position);
 
-			Color color2 = (CanCrit ? CombatText.DamagedHostileCrit : CombatText.DamagedHostile);
+			Color color2 = CanCrit ? CombatText.DamagedHostileCrit : CombatText.DamagedHostile;
 			CombatText.NewText(new Rectangle((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height), color2, (int)SoulCharge, CanCrit);
 
 			if (npc.life <= 0)

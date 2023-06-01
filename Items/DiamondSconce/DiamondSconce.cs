@@ -27,7 +27,7 @@ namespace UniqueItems.Items.DiamondSconce
 		{
 			CreateRecipe()
 				.AddIngredient(ItemID.Diamond, 3)
-				.AddIngredient(ItemID.Candle, 1)
+				.AddRecipeGroup("InterestingItems:Candles", 1)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}
